@@ -17,11 +17,6 @@ namespace MvcMovie.Controllers
             _repo = repo;
         }
 
-        //// GET: Movies
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Movie.ToListAsync());
-        //}  
         // GET: Movies
         public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
@@ -32,8 +27,6 @@ namespace MvcMovie.Controllers
             };
 
             return View(movieGenreVm);
-            //return View(await movies.ToListAsync());
-            //return View(await _context.Movie.ToListAsync());
         }
 
         [HttpPost]
@@ -45,20 +38,10 @@ namespace MvcMovie.Controllers
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
+            if (!id.HasValue)
+                return NotFound();
 
-            //var movie = await _context.Movie
-            //    .FirstOrDefaultAsync(m => m.Id == id);
-            //if (movie == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return View(movie);
-            return View();
+            return View(_repo.GetMovieById(id.Value));
         }
 
         // GET: Movies/Create
@@ -76,11 +59,11 @@ namespace MvcMovie.Controllers
         {
             if (ModelState.IsValid)
             {
-                //_context.Add(movie);
-                //await _context.SaveChangesAsync();
+                _repo.AddMovie(movie);
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(/*movie*/);
+            return View(movie);
         }
 
         // GET: Movies/Edit/5
@@ -108,8 +91,7 @@ namespace MvcMovie.Controllers
             {
                 try
                 {
-                    //_context.Update(movie);
-                    //await _context.SaveChangesAsync();
+                    _repo.EditMovie(movie);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -130,19 +112,12 @@ namespace MvcMovie.Controllers
         // GET: Movies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            //var movie = await _context.Movie
-            //    .FirstOrDefaultAsync(m => m.Id == id);
-            //if (movie == null)
-            //{
-            //    return NotFound();
-            //}
-
-            return View(/*movie*/);
+            return View(_repo.GetMovieById(id.Value));
         }
 
         // POST: Movies/Delete/5
@@ -150,15 +125,13 @@ namespace MvcMovie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            //var movie = await _context.Movie.FindAsync(id);
-            //_context.Movie.Remove(movie);
-            //await _context.SaveChangesAsync();
+            _repo.DeleteMovie(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool MovieExists(int id)
         {
-            return true;// _context.Movie.Any(e => e.Id == id);
+            return _repo.GetAllMovies().Any(e => e.Id == id);
         }
     }
 }

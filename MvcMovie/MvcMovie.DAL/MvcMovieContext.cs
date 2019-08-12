@@ -54,6 +54,31 @@ namespace MvcMovie.Models
 
             return query.ToList();
         }
+
+        public void DeleteMovie (int id)
+        {
+            mvcMovieContext.Movie.Remove(GetMovieById(id));
+            mvcMovieContext.SaveChanges();
+        }
+
+        public void AddMovie(Movie movie)
+        {
+            mvcMovieContext.Add(movie);
+            mvcMovieContext.SaveChanges();
+        }
+
+        public void EditMovie(Movie movie)
+        {
+            var entity = mvcMovieContext.Movie.FirstOrDefault(x => x.Id == movie.Id);
+            entity.Price = movie.Price;
+            entity.ReleaseDate = movie.ReleaseDate;
+            entity.Title = movie.Title;
+            entity.Rating = movie.Rating;
+            entity.Genre = movie.Genre;
+
+            mvcMovieContext.Update(entity);
+            mvcMovieContext.SaveChanges();
+        }
     }
 
     public interface IRepository
@@ -63,5 +88,11 @@ namespace MvcMovie.Models
         SelectList GetAllGenre();
 
         Movie GetMovieById(int id);
+
+        void DeleteMovie(int id);
+
+        void AddMovie(Movie movie);
+
+        void EditMovie(Movie movie);
     }
 }
