@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
+using AutoMapper;
 
 namespace MvcMovie
 {
@@ -81,6 +82,18 @@ namespace MvcMovie
                     //template: "{controller=Movies}/{action=Index}/{id?}");
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+    }
+
+    public class MovieController : Controller
+    {
+        private readonly IMapper _mapper;
+        private readonly IRepository _repo;
+        
+        public MovieController(IRepository repo, IMapper mapper)
+        {
+            _repo = repo;
+            _mapper = mapper;
         }
     }
 }

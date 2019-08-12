@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MvcMovie.DTO;
 
 namespace MvcMovie.Models
 {
@@ -18,8 +19,8 @@ namespace MvcMovie.Models
                 return; // DB has been seeded
             }
 
-            context.Movie.AddRange(
-                new Movie
+            context.MovieDTO.AddRange(
+                new MovieDTO
                 {
                     Title = "When Harry Met Sally",
                     ReleaseDate = DateTime.Parse("1989-2-12"),
@@ -28,7 +29,7 @@ namespace MvcMovie.Models
                     Price = 7.99M
                 },
 
-                new Movie
+                new MovieDTO
                 {
                     Title = "Ghostbusters ",
                     ReleaseDate = DateTime.Parse("1984-3-13"),
@@ -37,7 +38,7 @@ namespace MvcMovie.Models
                     Price = 8.99M
                 },
 
-                new Movie
+                new MovieDTO
                 {
                     Title = "Ghostbusters 2",
                     ReleaseDate = DateTime.Parse("1986-2-23"),
@@ -46,7 +47,7 @@ namespace MvcMovie.Models
                     Price = 9.99M
                 },
 
-                new Movie
+                new MovieDTO
                 {
                     Title = "Rio Bravo",
                     ReleaseDate = DateTime.Parse("1959-4-15"),

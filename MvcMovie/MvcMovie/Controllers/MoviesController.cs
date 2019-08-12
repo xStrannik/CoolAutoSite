@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
+using AutoMapper;
+using MvcMovie.DTO;
+
+
 
 namespace MvcMovie.Controllers
 {
@@ -20,13 +24,17 @@ namespace MvcMovie.Controllers
         // GET: Movies
         public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
-            var movieGenreVm = new MovieGenreViewModel
-            {
-                Genres = _repo.GetAllGenre(),
-                Movies = _repo.GetAllMovies(movieGenre, searchString).ToList()
-            };
+            Mapper.Initialize(cfg => cfg.CreateMap<MovieDTO, Movie>());
 
-            return View(movieGenreVm);
+            var listMovies = Mapper.Map<IEnumerable<MovieDTO>, IEnumerable<Movie>>(_repo.GetAllMovies());
+            //var movieGenreVm = new MovieGenreViewModel
+            //{
+            //    Genres = _repo.GetAllGenre(),
+            //    Movies = _repo.GetAllMovies(movieGenre, searchString).ToList()
+            //};
+
+            //return View(movieGenreVm);
+            return View(listMovies);
         }
 
         [HttpPost]
@@ -55,7 +63,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] MovieDTO movie)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +88,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] MovieDTO movie)
         {
             if (id != movie.Id)
             {
