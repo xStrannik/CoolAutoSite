@@ -1,13 +1,11 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MvcMovie.DTO;
+using MvcMovie.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MvcMovie.Models;
-using AutoMapper;
-using MvcMovie.DTO;
 
 
 
@@ -15,26 +13,26 @@ namespace MvcMovie.Controllers
 {
     public class MoviesController : Controller
     {
+
+        private readonly IMapper _mapper;
         private readonly IRepository _repo;
-        public MoviesController(MvcMovieContext context, IRepository repo)
+        public MoviesController(IMapper mapper, IRepository repo)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
         // GET: Movies
         public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<MovieDTO, Movie>());
-
-            var listMovies = Mapper.Map<IEnumerable<MovieDTO>, IEnumerable<Movie>>(_repo.GetAllMovies());
-            //var movieGenreVm = new MovieGenreViewModel
-            //{
-            //    Genres = _repo.GetAllGenre(),
-            //    Movies = _repo.GetAllMovies(movieGenre, searchString).ToList()
-            //};
-
-            //return View(movieGenreVm);
-            return View(listMovies);
+            var movieGenreVm = new MovieGenreViewModel()
+            {
+                Movies = _repo.GetAllMovies().Select(x => _mapper.Map<MovieDTO>(x)).ToList(),
+                Genres = _repo.GetAllGenre(),
+                SearchString = searchString,
+                MovieGenre = movieGenre
+            };
+            return View(movieGenreVm);
         }
 
         [HttpPost]
@@ -67,7 +65,8 @@ namespace MvcMovie.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repo.AddMovie(movie);
+
+                _repo.AddMovie(_mapper.Map<Movie>(movie));
 
                 return RedirectToAction(nameof(Index));
             }
@@ -99,7 +98,7 @@ namespace MvcMovie.Controllers
             {
                 try
                 {
-                    _repo.EditMovie(movie);
+                    _repo.EditMovie(_mapper.Map<Movie>(movie));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

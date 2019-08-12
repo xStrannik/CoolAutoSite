@@ -19,8 +19,8 @@ namespace MvcMovie.Models
                 return; // DB has been seeded
             }
 
-            context.MovieDTO.AddRange(
-                new MovieDTO
+            context.Movie.AddRange(
+                new Movie
                 {
                     Title = "When Harry Met Sally",
                     ReleaseDate = DateTime.Parse("1989-2-12"),
@@ -29,7 +29,7 @@ namespace MvcMovie.Models
                     Price = 7.99M
                 },
 
-                new MovieDTO
+                new Movie
                 {
                     Title = "Ghostbusters ",
                     ReleaseDate = DateTime.Parse("1984-3-13"),
@@ -38,7 +38,7 @@ namespace MvcMovie.Models
                     Price = 8.99M
                 },
 
-                new MovieDTO
+                new Movie
                 {
                     Title = "Ghostbusters 2",
                     ReleaseDate = DateTime.Parse("1986-2-23"),
@@ -47,7 +47,7 @@ namespace MvcMovie.Models
                     Price = 9.99M
                 },
 
-                new MovieDTO
+                new Movie
                 {
                     Title = "Rio Bravo",
                     ReleaseDate = DateTime.Parse("1959-4-15"),

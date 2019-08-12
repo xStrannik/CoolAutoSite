@@ -15,7 +15,6 @@ namespace MvcMovie.Models
         {
         }
 
-        public DbSet<MovieDTO> MovieDTO { get; set; }
         public DbSet<Movie> Movie { get; set; }
     }
 
@@ -34,19 +33,19 @@ namespace MvcMovie.Models
 
         }
 
-        public MovieDTO GetMovieById(int id)
+        public Movie GetMovieById(int id)
         {
-            return mvcMovieContext.MovieDTO.FirstOrDefault(x => x.Id == id);
+            return mvcMovieContext.Movie.FirstOrDefault(x => x.Id == id);
         }
 
         public SelectList GetAllGenre()
         {
-            return new SelectList(mvcMovieContext.MovieDTO.OrderBy(x => x.Genre).Select(x => x.Genre).Distinct());
+            return new SelectList(mvcMovieContext.Movie.OrderBy(x => x.Genre).Select(x => x.Genre).Distinct());
         }
 
-        public IEnumerable<MovieDTO> GetAllMovies(string movieGenre = "", string searchString = "")
+        public IEnumerable<Movie> GetAllMovies(string movieGenre = "", string searchString = "")
         {
-            var query = mvcMovieContext.MovieDTO.AsQueryable();
+            var query = mvcMovieContext.Movie.AsQueryable();
 
             if (!string.IsNullOrEmpty(movieGenre))
                 query = query.Where(x => x.Genre == movieGenre);
@@ -59,19 +58,19 @@ namespace MvcMovie.Models
 
         public void DeleteMovie (int id)
         {
-            mvcMovieContext.MovieDTO.Remove(GetMovieById(id));
+            mvcMovieContext.Movie.Remove(GetMovieById(id));
             mvcMovieContext.SaveChanges();
         }
 
-        public void AddMovie(MovieDTO movie)
+        public void AddMovie(Movie movie)
         {
             mvcMovieContext.Add(movie);
             mvcMovieContext.SaveChanges();
         }
 
-        public void EditMovie(MovieDTO movie)
+        public void EditMovie(Movie movie)
         {
-            var entity = mvcMovieContext.MovieDTO.FirstOrDefault(x => x.Id == movie.Id);
+            var entity = mvcMovieContext.Movie.FirstOrDefault(x => x.Id == movie.Id);
             entity.Price = movie.Price;
             entity.ReleaseDate = movie.ReleaseDate;
             entity.Title = movie.Title;
@@ -85,16 +84,16 @@ namespace MvcMovie.Models
 
     public interface IRepository
     {
-        IEnumerable<MovieDTO> GetAllMovies(string movieGenre = "", string searchString = "");
+        IEnumerable<Movie> GetAllMovies(string movieGenre = "", string searchString = "");
 
         SelectList GetAllGenre();
 
-        MovieDTO GetMovieById(int id);
+        Movie GetMovieById(int id);
 
         void DeleteMovie(int id);
 
-        void AddMovie(MovieDTO movie);
+        void AddMovie(Movie movie);
 
-        void EditMovie(MovieDTO movie);
+        void EditMovie(Movie movie);
     }
 }
