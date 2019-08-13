@@ -14,7 +14,7 @@ using System.Globalization;
 namespace MvcMovie
 {
     public class Startup
-    {
+    {        
         public void PriceForGlory()
         {
 
@@ -42,15 +42,6 @@ namespace MvcMovie
 
             services.AddDbContext<MvcMovieContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
-
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MovieProfile());
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,18 +78,6 @@ namespace MvcMovie
                     //template: "{controller=Movies}/{action=Index}/{id?}");
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
-    }
-
-    public class MovieController : Controller
-    {
-        private readonly IMapper _mapper;
-        private readonly IRepository _repo;
-        
-        public MovieController(IRepository repo, IMapper mapper)
-        {
-            _repo = repo;
-            _mapper = mapper;
         }
     }
 }

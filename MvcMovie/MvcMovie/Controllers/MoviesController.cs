@@ -14,12 +14,12 @@ namespace MvcMovie.Controllers
     public class MoviesController : Controller
     {
 
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
         private readonly IRepository _repo;
-        public MoviesController(IMapper mapper, IRepository repo)
+        public MoviesController(IRepository repo)
         {
             _repo = repo;
-            _mapper = mapper;
+            //_mapper = mapper;
         }
 
         // GET: Movies
@@ -27,7 +27,7 @@ namespace MvcMovie.Controllers
         {
             var movieGenreVm = new MovieGenreViewModel()
             {
-                Movies = _repo.GetAllMovies().Select(x => _mapper.Map<MovieDTO>(x)).ToList(),
+                Movies = _repo.GetAllMovies(movieGenre, searchString).ToList(),
                 Genres = _repo.GetAllGenre(),
                 SearchString = searchString,
                 MovieGenre = movieGenre
@@ -66,7 +66,7 @@ namespace MvcMovie.Controllers
             if (ModelState.IsValid)
             {
 
-                _repo.AddMovie(_mapper.Map<Movie>(movie));
+                _repo.AddMovie(movie);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -98,7 +98,7 @@ namespace MvcMovie.Controllers
             {
                 try
                 {
-                    _repo.EditMovie(_mapper.Map<Movie>(movie));
+                    _repo.EditMovie(movie);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
