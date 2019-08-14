@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MvcMovie.DTO;
+using MvcMovie.DAL;
+using MvcMovie.DAL.Models;
 using MvcMovie.Models;
+using MvcMovie.Models.DTO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

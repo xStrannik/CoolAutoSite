@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MvcMovie.DAL.Models;
 using MvcMovie.Models;
 using System.Diagnostics;
 

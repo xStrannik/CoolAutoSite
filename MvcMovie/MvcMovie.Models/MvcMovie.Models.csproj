@@ -9,9 +9,5 @@
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MvcMovie.Models\MvcMovie.Models.csproj" />
-  </ItemGroup>
-
+  
 </Project>

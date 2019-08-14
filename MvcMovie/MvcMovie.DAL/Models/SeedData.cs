@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using MvcMovie.DTO;
+using MvcMovie;
 
-namespace MvcMovie.Models
+namespace MvcMovie.DAL.Models
 {
     public class SeedData
     {

@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MvcMovie.DAL.Models;
 using MvcMovie.DAL.Profiles;
-using MvcMovie.DTO;
+using MvcMovie.Models;
+using MvcMovie.Models.DTO;
 
-namespace MvcMovie.Models
+namespace MvcMovie.DAL
 {
     public class MvcMovieContext : DbContext
     {

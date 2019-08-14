@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MvcMovie.Migrations
+namespace MvcMovie.DAL.Migrations
 {
     public partial class Initial : Migration
     {

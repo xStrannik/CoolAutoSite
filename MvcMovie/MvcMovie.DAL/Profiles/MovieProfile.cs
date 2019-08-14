@@ -1,6 +1,7 @@
-﻿using MvcMovie.Models;
+﻿using MvcMovie;
 using AutoMapper;
-using MvcMovie.DTO;
+using MvcMovie.Models.DTO;
+using MvcMovie.DAL.Models;
 
 namespace MvcMovie.DAL.Profiles
 {

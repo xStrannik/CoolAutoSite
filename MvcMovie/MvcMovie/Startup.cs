@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MvcMovie.DAL;
 using MvcMovie.Models;
 using System.Collections.Generic;
 using System.Globalization;

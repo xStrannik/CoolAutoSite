@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcMovie.Models;
 
-namespace MvcMovie.Migrations
+namespace MvcMovie.DAL.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
     [Migration("20190807130345_Rating")]

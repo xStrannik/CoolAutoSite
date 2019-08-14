@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MvcMovie.DTO;
+using MvcMovie.Models.DTO;
 
-namespace MvcMovie.Models
+namespace MvcMovie.DAL.Models
 {
     public class MovieGenreViewModel
     {
