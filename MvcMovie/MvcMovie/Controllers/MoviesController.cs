@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.DAL;
 using MvcMovie.DAL.Models;
+using MvcMovie.DAL.Repository;
 using MvcMovie.Models;
 using MvcMovie.Models.DTO;
+using MvcMovie.Models.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,8 +19,8 @@ namespace MvcMovie.Controllers
     {
 
         //private readonly IMapper _mapper;
-        private readonly IRepository _repo;
-        public MoviesController(IRepository repo)
+        private readonly IRepository<MovieDTO> _repo;
+        public MoviesController(IRepository<MovieDTO> repo)
         {
             _repo = repo;
             //_mapper = mapper;

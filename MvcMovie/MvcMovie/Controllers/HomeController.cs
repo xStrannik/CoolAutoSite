@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MvcMovie.DAL.Models;
 using MvcMovie.Models;
+using MvcMovie.Models.Models;
 using System.Diagnostics;
 
 namespace MvcMovie.Controllers

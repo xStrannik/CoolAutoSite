@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MvcMovie.DAL;
+using MvcMovie.DAL.Repository;
 using MvcMovie.Models;
+using MvcMovie.Models.DTO;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -39,7 +41,7 @@ namespace MvcMovie
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSingleton<IRepository, Repository>(_ => new Repository(Configuration.GetConnectionString("MvcMovieContext")));
+            services.AddSingleton<IRepository<MovieDTO>, Repository>(_ => new Repository(Configuration.GetConnectionString("MvcMovieContext")));
 
             services.AddDbContext<MvcMovieContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));

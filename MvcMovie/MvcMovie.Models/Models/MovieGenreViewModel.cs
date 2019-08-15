@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcMovie.Models.DTO;
 
-namespace MvcMovie.DAL.Models
+namespace MvcMovie.Models.Models
 {
     public class MovieGenreViewModel
     {
