@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
@@ -9,8 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MvcMovie.DAL;
 using MvcMovie.DAL.Repository;
-using MvcMovie.Models;
-using MvcMovie.Models.DTO;
+using MvcMovie.DAL.Repository.Interfaces;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -41,7 +39,7 @@ namespace MvcMovie
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSingleton<IRepository<MovieDTO>, Repository>(_ => new Repository(Configuration.GetConnectionString("MvcMovieContext")));
+            services.AddScoped<IMovieRepository, MovieRepository>(_ => new MovieRepository(Configuration.GetConnectionString("MvcMovieContext")));
 
             services.AddDbContext<MvcMovieContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));

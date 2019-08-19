@@ -1,13 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MvcMovie.DAL;
-using MvcMovie.DAL.Models;
-using MvcMovie.DAL.Repository;
-using MvcMovie.Models;
+using MvcMovie.DAL.Repository.Interfaces;
 using MvcMovie.Models.DTO;
 using MvcMovie.Models.Models;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,8 +14,8 @@ namespace MvcMovie.Controllers
     {
 
         //private readonly IMapper _mapper;
-        private readonly IRepository<MovieDTO> _repo;
-        public MoviesController(IRepository<MovieDTO> repo)
+        private readonly IMovieRepository _repo;
+        public MoviesController(IMovieRepository repo)
         {
             _repo = repo;
             //_mapper = mapper;
